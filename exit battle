@@ -1,0 +1,22 @@
+document.getElementById('escape').onclick = async function () {
+    try {
+      await fetch('https://pxi-fusion-menu.pages.dev/Main/initialize-prodigy.js').then(r => r.text()).then(t => eval(t));
+      
+      const { value: confirmed } = await swal.fire({
+        title: 'Are you sure you want to leave?',
+        text: 'This will exit the current battle',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, leave battle',
+        cancelButtonText: 'No, stay here'
+      });
+
+      if (confirmed) {
+        Boot.prototype.game._state._current.init();
+        swal.fire("Success", "Successfully left battle!", "success");
+      }
+    } catch (e) {
+      console.error("Exit Battle Error:", e);
+      swal.fire("Error", "An unexpected error occurred.", "error");
+    }
+  };
