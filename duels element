@@ -1,0 +1,36 @@
+document.getElementById('duelsElement').onclick = async function () {
+    try {
+      const prodigy = await fetch('https://pxi-fusion-menu.pages.dev/Main/initialize-prodigy.js');
+      const code = await prodigy.text();
+      eval(code);
+      const containers = await fetch('https://pxi-fusion-menu.pages.dev/Main/containers.js');
+      const code2 = await containers.text();
+      eval(code2);
+      
+      const { value: element } = await swal.fire({
+        title: 'What element do you want to set it to?',
+        input: 'select',
+        inputOptions: {
+          'ice': 'Ice',
+          'storm': 'Storm', 
+          'plant': 'Plant',
+          'fire': 'Fire',
+          'water': 'Water'
+        },
+        showCancelButton: true,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Please select an element!';
+          }
+        }
+      });
+
+      if (element) {
+        _.container.prodigy['d39-5647']._elementalBoost = element;
+        swal.fire("Success", "Element set successfully!", "success");
+      }
+    } catch (e) {
+      console.error("Element Set Error:", e);
+      swal.fire("Error", "An unexpected error occurred.", "error");
+    }
+  };
