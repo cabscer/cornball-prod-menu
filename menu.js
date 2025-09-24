@@ -195,7 +195,7 @@
     <h1>
         Cabscer
         <div class="icons">
-            <a href="fart" target="_blank">
+            <a href="https://discord.gg/K7y8Ss3AjC" target="_blank">
                 <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord Icon">
             </a>
             <a href="fart" target="_blank">
