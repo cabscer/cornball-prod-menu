@@ -1,0 +1,14 @@
+  // Toggle Click Teleporting
+  let teleportingInterval;
+  function toggleTeleporting(hack, player, gameData, toggled) {
+      if (toggled) {
+          teleportingInterval = setInterval(() => {
+            Boot.prototype.game._state._current.user.source._playerContainer.walkSpeed = 500;
+          }, 100);
+          success("You will now teleport when you click the screen.");
+      } else {
+          clearInterval(teleportingInterval);
+          player._playerContainer.walkSpeed = 1.5;
+          success("You will no longer teleport when you click the screen.");
+      }
+  }
