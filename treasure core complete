@@ -1,0 +1,34 @@
+document.getElementById('treasureCore').onclick = async function () {
+    try {
+      const prodigy = window._?.prodigy;
+      const battlePass = prodigy?._currentBattlePass || prodigy?._battlePass;
+  
+      if (!battlePass || typeof battlePass !== "object") {
+        swal.fire("Error", "Battle Pass not found.", "error");
+        return;
+      }
+  
+      const tiers = battlePass._tiers;
+  
+      if (!tiers || typeof tiers !== "object") {
+        swal.fire("Error", "Tiers not found in battle pass.", "error");
+        return;
+      }
+  
+      Object.values(tiers).forEach(tier => {
+        if (!tier) return;
+  
+        tier.isCompleted = true;
+  
+        if (tier.freeReward && tier.bottomPremiumReward) {
+          tier.bottomPremiumReward.claimed = false;
+          tier.bottomPremiumReward.claimable = true;
+        }
+      });
+  
+      swal.fire("Success", "Core Tiers Unlocked.", "success");
+    } catch (e) {
+      console.error("Battle Pass Unlock Error:", e);
+      swal.fire("Error", "An unexpected error occurred.", "error");
+    }
+  };
