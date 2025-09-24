@@ -1,0 +1,25 @@
+document.getElementById('setMagicoin').onclick = async function () {
+    try {
+      await fetch('https://pxi-fusion-menu.pages.dev/Main/initialize-prodigy.js').then(r => r.text()).then(t => eval(t));
+      
+      const { value: magicoin } = await swal.fire({
+        title: 'How many magicoin do you want?',
+        input: 'number',
+        inputPlaceholder: 'Enter amount of magicoin',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Please enter a number!';
+          }
+        }
+      });
+
+      if (magicoin) {
+        _.prodigy._hardCurrency._secureInventory._cache.currency[27].stackable.quantity = parseInt(magicoin);
+        swal.fire("Success", "Magicoin set successfully!", "success");
+      }
+    } catch (e) {
+      console.error("Magicoin Set Error:", e);
+      swal.fire("Error", "An unexpected error occurred.", "error");
+    }
+  };
